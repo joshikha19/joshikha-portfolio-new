@@ -1,0 +1,75 @@
+import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import clsx from "clsx";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+import type { Metadata } from "next";
+import Particles from "./components/particles";
+import { Footer } from "./section/footer";
+import { Navbar } from "./section/navbar";
+
+export const metadata: Metadata = {
+	metadataBase: new URL("https://joshikha.com"),
+	title: {
+		default: "Joshikha S",
+		template: "%s | Joshikha S",
+	},
+	description: "Engineer, developer and writer.",
+	authors: [{ name: "Joshikha S" }],
+	creator: "Joshikha S",
+	publisher: "Joshikha S",
+	category: "Technology",
+	openGraph: {
+		title: "Joshikha S",
+		description: "Engineer, developer and writer.",
+		url: "https://joshikha.com",
+		siteName: "Joshikha S",
+		locale: "en_US",
+		type: "website",
+		images: [
+			{
+				url: "D:\portfolio-website\public\opengraph.jpg",
+				width: 256,
+				height: 256,
+				alt: "Joshikha S's portfolio website",
+			},
+		],
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-video-preview": -1,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+		},
+	},
+	twitter: {
+		title: "Joshikha S",
+		card: "summary_large_image",
+		images: "https://joshikha.com/opengraph.png",
+	},
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+	return (
+		<html
+			lang="en"
+			className={clsx("text-black bg-white dark:text-white dark:bg-[#111010]", GeistSans.variable, GeistMono.variable)}
+		>
+			<body className="antialiased max-w-2xl mb-10 flex flex-col mx-4 mt-8 lg:mx-auto">
+				<SpeedInsights />
+				<Analytics />
+				<main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
+					<Particles className="absolute inset-0 -z-10 animate-fade-in" quantity={300} />
+					<Navbar />
+					{children}
+					<Footer />
+				</main>
+			</body>
+		</html>
+	);
+}
